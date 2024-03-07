@@ -12,6 +12,8 @@ public class AListLab<T> implements ListInterface<T>
 		AListLab <String> AString = new AListLab <String>(1);
 		AListLab <String> AnotherDifferentString = new AListLab <String>(2);
 		AListLab <String> TheSameStringAsTheLineAbove = new AListLab <String>(2);
+		AListLab <Double> NotAString = new AListLab <Double>();
+		AListLab <Double> UninitializedDouble = new AListLab <Double>();
 
 		int duplicatenumber = 5; //arbitrary value that is duplicate, assigned to an int for debugging
 		int impossiblenumber = 44; //arbitrary value that is not in the list, assigned to an int for debugging
@@ -29,6 +31,10 @@ public class AListLab<T> implements ListInterface<T>
 		TheSameStringAsTheLineAbove.add("Different string!");
 		TheSameStringAsTheLineAbove.add("With a different length!");
 
+		for (double i = 1; i <= 10; i++) {
+			NotAString.add(i);
+		}
+
 		System.out.print("The List \"AFewNumbers\" with the values: ");
 		for (int i = 1; i <= 11; i++) {
 			System.out.print(AFewNumbers.getEntry(i) + " ");
@@ -41,7 +47,7 @@ public class AListLab<T> implements ListInterface<T>
 		System.out.println("\nLet us search for the last index of the duplicate value of " + duplicatenumber);
         System.out.println("Last index of " + duplicatenumber + ": " + AFewNumbers.getLastIndex(duplicatenumber));
 
-        System.out.println("\n\nGiven 3 String lists: ");
+        System.out.println("\n\nGiven 3 String lists, 1 Double list, and 1 UninitializedDouble Double list: ");
 		System.out.print("List \"AString\" with strings: ");
 		for (int i = 1; i < (AString.numberOfEntries + 1); i++) {
 			System.out.print(AString.getEntry(i) + " ");
@@ -57,6 +63,13 @@ public class AListLab<T> implements ListInterface<T>
 			System.out.print(TheSameStringAsTheLineAbove.getEntry(i) + " ");
 		}
 
+		System.out.print("\nList \"NotString\" with doubles: ");
+		for (int i = 1; i < (NotAString.numberOfEntries + 1); i++) {
+			System.out.print(NotAString.getEntry(i) + " ");
+		}
+		
+		System.out.print("\nList \"UninitializedDouble\" with double type that is not unitialized");
+
 		System.out.println("\n\nLet us compare \"AString\" with \"AnotherDifferentString\":");
 		System.out.println("Are the two strings equal? " + (String.valueOf(AString.equals(AnotherDifferentString))).toUpperCase());
 
@@ -65,10 +78,18 @@ public class AListLab<T> implements ListInterface<T>
 
 		System.out.println("\nLet us compare \"TheSameStringAsTheLineAbove\" with \"AString\":");
 		System.out.println("Are the two strings equal? " + (String.valueOf(TheSameStringAsTheLineAbove.equals(AString))).toUpperCase());
+
+		System.out.println("\nLet us compare \"Astring\" with \"NotString\":");
+		System.out.println("Are the two strings equal? " + (String.valueOf(AString.equals(NotAString))).toUpperCase());
+
+		System.out.println("\nLet us compare \"Astring\" with \"UninitializedDouble\":");
+		System.out.println("Are the two strings equal? " + (String.valueOf(AString.equals(UninitializedDouble))).toUpperCase());
+
 	}
 
 	/* Terminal Output:
 	 * The List "AFewNumbers" with the values: 1 2 3 4 5 6 7 8 9 10 5 
+
 		Let us search for the last index of 2
 		Last index of 2: 1
 
@@ -80,10 +101,12 @@ public class AListLab<T> implements ListInterface<T>
 		Last index of 5: 10
 
 
-		Given 3 String lists:
+		Given 3 String lists, 1 Double list, and 1 UninitializedDouble Double list:
 		List "AString" with strings: String
 		List "AnotherDifferentString" with strings: Different string! With a different length!
 		List "TheSameStringAsTheLineAbove" with strings: Different string! With a different length!
+		List "NotString" with doubles: 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0 10.0
+		List "UninitializedDouble" with double type that is not unitialized
 
 		Let us compare "AString" with "AnotherDifferentString":
 		Are the two strings equal? FALSE
@@ -93,10 +116,13 @@ public class AListLab<T> implements ListInterface<T>
 
 		Let us compare "TheSameStringAsTheLineAbove" with "AString":
 		Are the two strings equal? FALSE
+
+		Let us compare "Astring" with "NotString":
+		Are the two strings equal? FALSE
+
+		Let us compare "Astring" with "UninitializedDouble":
+		Are the two strings equal? FALSE
 	 */
-
-
-
 
 	// Problem 1.1
 	public int getLastIndex(T item) {
