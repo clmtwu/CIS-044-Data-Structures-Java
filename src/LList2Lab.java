@@ -86,6 +86,8 @@ public class LList2Lab<T> implements ListInterface<T>
 		System.out.println("\nLet us compare \"Astring\" with \"UninitializedDouble\":");
 		System.out.println("Are the two strings equal? " + (String.valueOf(AString.equals(UninitializedDouble))).toUpperCase());
 
+		System.out.println("\nSince UnitializedDouble has no values, let's see if it can find duplicates!");
+		System.out.println("Is such a feat possible with pi? " + UninitializedDouble.getLastIndex(3.14));
 	}
 
 	/* Terminal Output:
@@ -123,32 +125,33 @@ public class LList2Lab<T> implements ListInterface<T>
 
 		Let us compare "Astring" with "UninitializedDouble":
 		Are the two strings equal? FALSE
+
+		Since UnitializedDouble has no values, let's see if it can find duplicates!
+		Is such a feat possible with pi? -1
 	 */
 
 	// Lab 3
 	// Problem 2.1
-	public int getLastIndex(T item) { //method is identical to LList2Lab but modified for nodes
-		Node index = firstNode;
+	public int getLastIndex(T item) { //method is identical to LList2Lab but modified for nodes, please see the code on that file for the comments
+		Node nodeindex = firstNode;
 		int result = -1;
-        int currentIndex = 1;
+        int intindex = 1;
 
-        while (index != null) {
-            if (Objects.equals(item, index.getData())) {
-                result = currentIndex;
+        while (nodeindex != null) {
+            if (Objects.equals(item, nodeindex.getData())) {
+                result = intindex;
             }
-            index = index.getNextNode();
-            currentIndex++;
+            nodeindex = nodeindex.getNextNode();
+            intindex++;
         }
-
         return result;
 	}
 	
 	// Problem 2.2
-	public boolean equals(Object other) { //method is identical to LList2Lab but modified for nodes
-		LList2Lab <?> otherList = (LList2Lab <?>) other;
-
-		Node currentNode = firstNode;
-        Node otherNode = (LList2Lab<T>.Node) otherList.firstNode;
+	public boolean equals(Object other) { //method is identical to LList2Lab but modified for nodes, please see the code on that file for the comments
+		LList2Lab <?> temporary = (LList2Lab <?>) other;
+		Node increment = (LList2Lab<T>.Node) temporary.firstNode; //will have a typecast warning but in the parameters of this program is fine
+		Node now = firstNode;
 
 		if (other == null) {
 			return false;
@@ -162,19 +165,17 @@ public class LList2Lab<T> implements ListInterface<T>
             return false;
         }
 
-        if (this.getLength() != otherList.getLength()) {
+        if (this.getLength() != temporary.getLength()) {
             return false;
         }
 
-        while (currentNode != null) {
-            if (!Objects.equals(currentNode.getData(), otherNode.getData())) {
+        while (now != null) {
+            if (!Objects.equals(now.getData(), increment.getData())) {
                 return false;
             }
-
-            currentNode = currentNode.getNextNode();
-            otherNode = otherNode.getNextNode();
+            increment = increment.getNextNode();
+			now = now.getNextNode();
         }
-
         return true;
 	}
 	
@@ -311,14 +312,14 @@ public class LList2Lab<T> implements ListInterface<T>
 	public boolean contains(T anEntry)
 	{
 		boolean found = false;
-		Node currentNode = firstNode;
+		Node now = firstNode;
 		
-		while (!found && (currentNode != null))
+		while (!found && (now != null))
 		{
-			if (anEntry.equals(currentNode.getData()))
+			if (anEntry.equals(now.getData()))
 				found = true;
 			else
-				currentNode = currentNode.getNextNode();
+				now = now.getNextNode();
 		} // end while
 		
 		return found;
@@ -354,11 +355,11 @@ public class LList2Lab<T> implements ListInterface<T>
       T[] result = (T[])new Object[numberOfEntries]; // warning: [unchecked] unchecked cast
 
 	  int index = 0;
-     Node currentNode = firstNode;
-	  while ((index < numberOfEntries) && (currentNode != null))
+     Node now = firstNode;
+	  while ((index < numberOfEntries) && (now != null))
 	  { 
-	    result[index] = currentNode.getData();
-	    currentNode = currentNode.getNextNode();
+	    result[index] = now.getData();
+	    now = now.getNextNode();
        index++; 
 	  } // end while
      
@@ -370,18 +371,18 @@ public class LList2Lab<T> implements ListInterface<T>
 	private Node getNodeAt(int givenPosition)
 	{
 		assert (firstNode != null) && (1 <= givenPosition) && (givenPosition <= numberOfEntries);
-		Node currentNode = firstNode;
+		Node now = firstNode;
 		
       if (givenPosition == numberOfEntries)
-         currentNode = lastNode;
+         now = lastNode;
       else if (givenPosition > 1)      // traverse the chain to locate the desired node
 		{
          for (int counter = 1; counter < givenPosition; counter++)
-            currentNode = currentNode.getNextNode();
+            now = now.getNextNode();
 		} // end if
       
-		assert currentNode != null;
-		return currentNode;
+		assert now != null;
+		return now;
 	} // end getNodeAt
 
 	private class Node 

@@ -47,7 +47,7 @@ public class AListLab<T> implements ListInterface<T>
 		System.out.println("\nLet us search for the last index of the duplicate value of " + duplicatenumber);
         System.out.println("Last index of " + duplicatenumber + ": " + AFewNumbers.getLastIndex(duplicatenumber));
 
-        System.out.println("\n\nGiven 3 String lists, 1 Double list, and 1 UninitializedDouble Double list: ");
+        System.out.println("\n\nGiven 3 String lists, 1 Double list, and 1 Uninitialized Double list: ");
 		System.out.print("List \"AString\" with strings: ");
 		for (int i = 1; i < (AString.numberOfEntries + 1); i++) {
 			System.out.print(AString.getEntry(i) + " ");
@@ -84,6 +84,9 @@ public class AListLab<T> implements ListInterface<T>
 
 		System.out.println("\nLet us compare \"Astring\" with \"UninitializedDouble\":");
 		System.out.println("Are the two strings equal? " + (String.valueOf(AString.equals(UninitializedDouble))).toUpperCase());
+
+		System.out.println("\nSince UnitializedDouble has no values, let's see if it can find duplicates!");
+		System.out.println("Is such a feat possible with pi? " + UninitializedDouble.getLastIndex(3.14));
 
 	}
 
@@ -122,6 +125,9 @@ public class AListLab<T> implements ListInterface<T>
 
 		Let us compare "Astring" with "UninitializedDouble":
 		Are the two strings equal? FALSE
+
+		Since UnitializedDouble has no values, let's see if it can find duplicates!
+		Is such a feat possible with pi? -1
 	 */
 
 	// Problem 1.1
