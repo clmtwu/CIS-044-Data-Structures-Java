@@ -8,4 +8,4 @@ Lab 2: Lab2.java
 
 Lab 3: ArrayQueueLab.java
 
-Lab 4: LList2Lab.java AND LList2Lab.java
+Lab 4: AListLab.java AND LList2Lab.java
