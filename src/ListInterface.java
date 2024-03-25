@@ -9,25 +9,25 @@ public interface ListInterface<T>
 {
    /** Adds a new entry to the end of this list.
        Entries currently in the list are unaffected.
-       The listÕs size is increased by 1.
+       The listï¿½s size is increased by 1.
        @param newEntry the object to be added as a new entry */
    public void add(T newEntry);
    
    /** Adds a new entry at a specified position within this list.
        Entries originally at and above the specified position
        are at the next higher position within the list.
-       The listÕs size is increased by 1.
+       The listï¿½s size is increased by 1.
        @param newPosition  an integer that specifies the desired
                            position of the new entry
        @param newEntry  the object to be added as a new entry
        @return true if the addition is successful, or
                false if newPosition < 1, or newPosition > getLength() + 1 */
-   public boolean add(int newPosition, T newEntry);
+   public void add(int newPosition, T newEntry);
    
    /** Removes the entry at a given position from this list.
        Entries originally at positions higher than the given
        position are at the next lower position within the list,
-       and the listÕs size is decreased by 1.
+       and the listï¿½s size is decreased by 1.
        @param givenPosition  an integer that indicates the position of
                              the entry to be removed
        @return a reference to the removed entry or null, if either
@@ -46,7 +46,7 @@ public interface ListInterface<T>
        @return true if the replacement occurs, or false if either the
                list is empty, givenPosition < 1, or
                givenPosition > getLength() */
-   public boolean replace(int givenPosition, T newEntry);
+   public T replace(int givenPosition, T newEntry);
    
    /** Retrieves the entry at a given position in this list.
        @param givenPosition  an integer that indicates the position of

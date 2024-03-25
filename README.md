@@ -11,3 +11,7 @@ Lab 3: ArrayQueueLab.java
 Lab 4: AListLab.java AND LList2Lab.java
 
 Lab 5: Lab5.java
+
+Lab 6: Solitarie Game
+
+    Note: Deleted AListLab and 
