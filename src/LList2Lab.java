@@ -6,7 +6,7 @@ import java.util.Objects;
    @author Frank M. Carrano
    @version 3.
 */
-public class LList2Lab<T> implements ListInterface<T>
+public class LList2Lab<T> implements ListInterface1<T>
 {
 	public static void main(String[] args)  {
 		LList2Lab <Integer> AFewNumbers = new LList2Lab <Integer>(); //reusing constructors from Lab 3

@@ -5,7 +5,7 @@ import java.util.Arrays;
    @author Frank M. Carrano
 */
 
-public class AListLab<T> implements ListInterface<T> 
+public class AListLab<T> implements ListInterface1<T> 
 {
 	public static void main(String[] args)  {
 		AListLab <Integer> AFewNumbers = new AListLab <Integer>(11); //reusing constructors from Lab 3
