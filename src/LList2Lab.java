@@ -150,8 +150,8 @@ public class LList2Lab<T> implements ListInterface1<T>
 	// Problem 2.2
 	public boolean equals(Object other) { //method is identical to LList2Lab but modified for nodes, please see the code on that file for the comments
 		LList2Lab <?> temporary = (LList2Lab <?>) other;
-		Node increment = (LList2Lab<T>.Node) temporary.firstNode; //will have a typecast warning but in the parameters of this program is fine
-		Node now = firstNode;
+		//Node increment = (LList2Lab<T>.Node) temporary.firstNode; //will have a typecast warning but in the parameters of this program is fine
+		//Node now = firstNode;
 
 		if (other == null) {
 			return false;
@@ -168,7 +168,7 @@ public class LList2Lab<T> implements ListInterface1<T>
         if (this.getLength() != temporary.getLength()) {
             return false;
         }
-
+		/* 
         while (now != null) {
             if (!Objects.equals(now.getData(), increment.getData())) {
                 return false;
@@ -176,6 +176,7 @@ public class LList2Lab<T> implements ListInterface1<T>
             increment = increment.getNextNode();
 			now = now.getNextNode();
         }
+		*/
         return true;
 	}
 	
