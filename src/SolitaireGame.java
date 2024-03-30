@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Random;
 /**
    A solitaire matching game in which you have a list of random
@@ -10,9 +8,9 @@ import java.util.Random;
 
  */
 public class SolitaireGame {
+	//values used to initialize random, no magic numbers!
 	static final int start = 1;
 	static final int end = 40;
-	static int counter = 0;
 
 	/** Initializes the list with 40 random 2 digit numbers. */
 	public static void initializeList(ArrayListWithIterator<Integer> theList) {
@@ -35,17 +33,21 @@ public class SolitaireGame {
 		//a little trick i learned in ap cs to mod 10 to get the last digit and divide by 10 to get the first digit
 		//memory should be O(1) and should be better than creating an array and comparing
 		//works for all edge cases since this method works for all two digit int numbers
+		//would be faster to do something like return the actual statement, but for recordkeeping i thought this was reasonable
 	} // end removable
 
 	/** Display the contents of theList using an Iterator
 	 * 
 	 */
 	public static void displayList(ArrayListWithIterator<Integer> theList) {
+		//creating an iterator object to transverse the list (counter.hasNext()) and print it
+		//stops when reached end of list
 		Iterator <Integer> counter = theList.iterator();
 		while (counter.hasNext()) {
 			System.out.print(Integer.toString(counter.next()) + " ");
 		}		
 	}
+
 	/** Scans over the list and removes any pairs of values that are removable.
 		@param theList  The list of 2 digit integers to scan over.
 		@return  True if any pair of integers was removed. */
@@ -53,21 +55,21 @@ public class SolitaireGame {
 		boolean flag = false;
 		Iterator<Integer> current = theList.getIterator();
 		while (current.hasNext()) {
-			Integer x = current.next();
+			Integer x = current.next(); //adding value of .next() to x
 			if (!current.hasNext()) {
 				break; // Reached the end of the list, no more pairs to check
 			}
-			Integer y = current.next();
+			Integer y = current.next(); //adding the next value of .next() to y
 
-			if (removable(x, y)) {
+			if (removable(x, y)) { //giving output when removed
 				System.out.println("Removed: " + x + " " + y);
 				current.remove();
-				flag = true;
+				flag = true; //stop scenario
 			}
 		}
 
-		if (theList.getLength() == 0) {
-			return !flag;
+		if (theList.getLength() == 0) { //if list is 0, don't compare anymore
+			return !flag; //stop scenario
 		}
 		return flag;
 	} // end scanAndRemovePairs
