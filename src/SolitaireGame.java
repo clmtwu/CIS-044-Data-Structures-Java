@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Random;
 /**
    A solitaire matching game in which you have a list of random
@@ -10,7 +12,7 @@ import java.util.Random;
 public class SolitaireGame {
 	static final int start = 1;
 	static final int end = 40;
-	static int index = start;
+	static int counter = 0;
 
 	/** Initializes the list with 40 random 2 digit numbers. */
 	public static void initializeList(ArrayListWithIterator<Integer> theList) {
@@ -19,14 +21,6 @@ public class SolitaireGame {
 			theList.add(random.nextInt(90) + 10);
 		}
 	} // end initializeList
-
-	//WARNING: list to debug, is not used in submission
-	public static void hardcodedList(ArrayListWithIterator<Integer> theList) {
-		Integer [] list = {81, 50, 11, 61, 42, 74, 16, 65, 49, 49, 11, 19, 67, 79, 33, 95, 85, 52, 59, 67, 46, 81, 62, 30, 60, 66, 80, 96, 30, 81, 37, 30, 34, 30, 15, 80, 11, 61, 55, 46};
-		for (int i = 0; i < list.length; i++) {
-			theList.add(list[i]);
-		}
-	}
 
 	/** Sees whether two numbers are removable.
 		@param x  The first 2 digit integer value.
@@ -49,94 +43,74 @@ public class SolitaireGame {
 	public static void displayList(ArrayListWithIterator<Integer> theList) {
 		Iterator <Integer> counter = theList.iterator();
 		while (counter.hasNext()) {
-			if (!counter.hasNext()) {
-				System.out.print(Integer.toString(counter.next()));
-			}
-			else {
-				System.out.print(Integer.toString(counter.next()) + " ");
-			}
-			
+			System.out.print(Integer.toString(counter.next()) + " ");
 		}		
 	}
 	/** Scans over the list and removes any pairs of values that are removable.
 		@param theList  The list of 2 digit integers to scan over.
 		@return  True if any pair of integers was removed. */
 	public static boolean scanAndRemovePairs(ArrayListWithIterator<Integer> theList) {
-		Iterator <Integer> ahead = theList.iterator();
-		Iterator <Integer> current = theList.iterator();
-
-		int now = 1;
-		int future = 2;
 		boolean flag = false;
-
-		ahead.next();
-
-		while (ahead.hasNext()) {
+		Iterator<Integer> current = theList.getIterator();
+		while (current.hasNext()) {
 			Integer x = current.next();
-			Integer y = ahead.next();
-			if (removable(x, y) && ahead.hasNext()) {
-				System.out.print("\tRemoving: ");
-				System.out.print(Integer.toString(x) + " ");
-				System.out.print(Integer.toString(y) + "\n");
-				theList.remove(now);
-				theList.remove(future);
-				flag = true;
+			if (!current.hasNext()) {
+				break; // Reached the end of the list, no more pairs to check
 			}
-			now++;
-			future++;
-		}
-		
-		return flag;
+			Integer y = current.next();
 
-		
-		/*
-		if (ahead.hasNext()) {
-			ahead.next();
-		}
-
-		while (ahead.hasNext()) {
-			Integer x = current.next();
-			Integer y = ahead.next();
 			if (removable(x, y)) {
-				System.out.print("Removing: ");
-				System.out.print(Integer.toString(x) + " ");
-				System.out.print(Integer.toString(y) + "\n");
-				theList.remove(now);
-				theList.remove(future);
+				System.out.println("Removed: " + x + " " + y);
+				current.remove();
 				flag = true;
 			}
-			now++;
-			future++;
 		}
 
-		index++;
+		if (theList.getLength() == 0) {
+			return !flag;
+		}
 		return flag;
-		*/
-		
 	} // end scanAndRemovePairs
 
 	public static void main(String args[]) {
 		ArrayListWithIterator<Integer> RandomList = new ArrayListWithIterator<Integer>();
-		Integer Count = 0;
-		hardcodedList(RandomList);
+		initializeList(RandomList);
 		System.out.print("Let us assume a random list with " + RandomList.getLength() + " characters: ");
 		displayList(RandomList);
 		System.out.println("\nLet us now filter this list:");
-		for (Iterator <Integer> counter = RandomList.iterator(); counter.hasNext(); Count = counter.next() ) {
-			scanAndRemovePairs(RandomList);
-			System.out.print("The list is now: ");
-			displayList(RandomList);
-			System.out.print("\n");
-			if (scanAndRemovePairs(RandomList) == false) {
-				System.out.println("No more pairs to remove.");
-				break;
+
+		Iterator<Integer> listIterator = RandomList.getIterator();
+		boolean pairsRemoved = true;
+
+		while (listIterator.hasNext() && pairsRemoved) {
+			pairsRemoved = scanAndRemovePairs(RandomList);
+
+			if (pairsRemoved) {
+				System.out.print("The list is now: [");
+				displayList(RandomList);
+				System.out.print("] \n");
+			}
+			else {
+				System.out.print("No more pairs to remove.");
 			}
 		}
 	} // end main
 } // end SolitaireGame
 
 /* README: Output:
- * 
+ * 	Let us assume a random list with 40 characters: 46 56 85 39 51 18 96 71 39 96 59 99 83 53 80 68 17 34 68 80 60 62 33 57 56 50 25 25 49 88 39 11 91 37 68 51 53 92 20 14 
+	Let us now filter this list:
+	Removed: 46 56
+	Removed: 59 99
+	Removed: 83 53
+	Removed: 60 62
+	Removed: 56 50
+	Removed: 25 25
+	The list is now: [46 85 39 51 18 96 71 39 96 59 83 80 68 17 34 68 80 60 33 57 56 25 49 88 39 11 91 37 68 51 53 92 20 14 ]
+	Removed: 83 80
+	Removed: 80 60
+	The list is now: [46 85 39 51 18 96 71 39 96 59 83 68 17 34 68 80 33 57 56 25 49 88 39 11 91 37 68 51 53 92 20 14 ]
+	No more pairs to remove.
  */
 
 /*
