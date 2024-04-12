@@ -50,14 +50,14 @@ public class ArrayStack2Lab<T> implements StackInterface<T>
 
     // Problem 2
     public int remove(int n) {
-        int count = 0; 
+        int temp = 0; 
         for (int i = 0; i < n && !isEmpty(); i++) {
             pop();
-            count++;
+            temp++;
             //popping and incrementing for each n for each stack index
             //works for n > index since it will iteratively check if it is empty beforehand before running the for-loop
         }
-        return count;
+        return temp;
     } //end remove()
 
     /* Terminal Output:

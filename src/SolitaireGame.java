@@ -40,11 +40,11 @@ public class SolitaireGame {
 	 * 
 	 */
 	public static void displayList(ArrayListWithIterator<Integer> theList) {
-		//creating an iterator object to transverse the list (counter.hasNext()) and print it
+		//creating an iterator object to transverse the list (temper.hasNext()) and print it
 		//stops when reached end of list
-		Iterator <Integer> counter = theList.iterator();
-		while (counter.hasNext()) {
-			System.out.print(Integer.toString(counter.next()) + " ");
+		Iterator <Integer> temper = theList.iterator();
+		while (temper.hasNext()) {
+			System.out.print(Integer.toString(temper.next()) + " ");
 		}		
 	}
 

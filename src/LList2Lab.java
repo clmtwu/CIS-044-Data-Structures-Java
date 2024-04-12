@@ -378,7 +378,7 @@ public class LList2Lab<T> implements ListInterface1<T>
          now = lastNode;
       else if (givenPosition > 1)      // traverse the chain to locate the desired node
 		{
-         for (int counter = 1; counter < givenPosition; counter++)
+         for (int temper = 1; temper < givenPosition; temper++)
             now = now.getNextNode();
 		} // end if
       
