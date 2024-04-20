@@ -1,5 +1,3 @@
-import java.util.* ;
-
 public class Lab7 {
 	public static void main(String[] args)  {
 		int [] A1 = {3, 6, 5, 1, 4};
