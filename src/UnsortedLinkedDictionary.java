@@ -1,180 +1,294 @@
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
+public class UnsortedLinkedDictionary<K, V> {
+    private Node first; 
+    private Node last; 
+    private int count;
 
-public class UnsortedLinkedDictionary <K, V>  {
-	private Node first;
-	private Node last;
-	private int count;
-	
-	public static void main(String args[]) {
-		// Add you tests here
+    public static void main(String[] args) {
+        System.out.print("I've recently given my child a phone that I need to add some important phone numbers in: ");
+        String emergency = "police";
+        String uncle = "uncle";
+        String aunt = "aunt";
+        String godfather = "godfather";
+        String godmother = "godmother";
+        String dad = "father";
+        String mom = "mother";
+        String brother = "brother";
+        String sister = "sister";
+        String grandfather = "grandfather";
+        String grandmother = "grandmother";
 
-	}
-	public UnsortedLinkedDictionary() {
-		this.first = null;
-		this.last = null;
-		count = 0;
-	} // end default constructor
-	
-   	public V add(K key, V value) {
-		V result = null;
-		if (contains(key)) {
-			Node currentNode = first; //iterating through nodes
-			while (currentNode != null) {
-				if (key.equals(currentNode.getKey())) { 
-					result = currentNode.getValue();
-					currentNode.setValue(value);
-					break;
-				}
-				else {
-					currentNode = currentNode.getNextNode();
-				}
-			}
-		}
-		else { //creating a new object if no key is present
-			Node newNode = new Node (key, value);
-			if (isEmpty()) {
-				first = newNode;
-			}
-			else {
-				last.setNextNode(newNode);
-				last = newNode;
-				count++;
-			}
-		}
-		return result;
-  	 } // end add
+        System.out.println(emergency + ", " + uncle + ", " + aunt + ", " + godfather + ", " + godmother + ", " + dad + ", " + mom + ", " + brother + ", " + sister + ", " + grandfather + ", " + grandmother);
 
-   	public V remove(K key) {
-		V result = null;
-		if(contains(key)){
-			Node currentNode = first;
-			while (currentNode != null) {
-				//case 1: removing first and only entry
-				if (currentNode.equals(first) && key.equals(currentNode.getKey())) {
-					result = currentNode.getValue();
-					first = first.getNextNode();
-					if (count == 1) {
-						last = null;
-						count--;
-						break;
-					}
-				}
-				//case 2: removing !(case 1)
-				else if (key.equals(currentNode.getNextNode().getKey())) {
-					Node nodeBefore = currentNode;
-					Node nodeToRemove = nodeBefore.getNextNode();
-					Node nodeAfter = nodeToRemove.getNextNode();
-					result = nodeToRemove.getValue();
-					nodeBefore.setNextNode(nodeAfter); // disconnect the node to be removed
-					// save entry to be removed
-					if (last.equals(nodeToRemove))
-					last = nodeBefore; // last node was removed
-					count--;
-					break;
-				}
-				//case 3 !(case 1 && case 2): incrementing
-				else {
-					currentNode = currentNode.getNextNode();
-				}
-			}
-		}
-		return result;
-   	} // end remove
+        System.out.println("\nIn order to add these names to my phone's software, let us use a dictionary");
+        System.out.println("Creating dictionary... ");
+        UnsortedLinkedDictionary <String, String> phoneNumbers = new UnsortedLinkedDictionary<String, String>();
 
-   	public V getValue(K key) {
-		V result = null;
-		if(contains(key)){
-			Node currentNode = first;
-			while (currentNode != null) {
-				//case 1: removing first and only entry
-				if (key.equals(currentNode.getKey())) {
-					result = currentNode.getValue();
-					break;
-				}
-				else {
-					currentNode = currentNode.getNextNode();
-				}
-			}
-		}
-		return result;
-   	} // end getValue
+        System.out.println("Is this list empty? " + (String.valueOf(phoneNumbers.isEmpty())).toUpperCase());
 
-	public boolean contains(K key) {
-		boolean found = false;
-		Node currentNode = first;
+        System.out.println("Let's now add all of these numbers");
+        phoneNumbers.add(emergency, "911");
+        phoneNumbers.add(uncle, "1");
+        phoneNumbers.add(aunt, "2");
+        phoneNumbers.add(godfather, "3");
+        phoneNumbers.add(godmother, "4");
+        phoneNumbers.add(dad, "5");
+        phoneNumbers.add(mom, "6");
+        phoneNumbers.add(brother, "7");
+        phoneNumbers.add(sister, "8");
+        phoneNumbers.add(grandfather, "9");
+        phoneNumbers.add(grandmother, "10");
 
-		while (!found && (currentNode != null)) {
-			if (key.equals(currentNode.getKey())) {
-				found = true;
-			}
-			else { //iterate through the nodes
-				currentNode = currentNode.getNextNode();
-			}
-		}
-		return found;
-   	} // end contains
+        System.out.println("\nIs this list empty now? " + (String.valueOf(phoneNumbers.isEmpty())).toUpperCase());
+        System.out.println("How many elements are in it, then? " + phoneNumbers.getSize());
+        System.out.println("\nDoes the list contain " + brother + "? " + (String.valueOf(phoneNumbers.contains(brother))).toUpperCase());
+        System.out.println("How about the child's teacher? " + (String.valueOf(phoneNumbers.contains("teacher"))).toUpperCase());
+        System.out.println("\nWe live in a pretty safe place, so I don't think the " + emergency + "number is needed. let us remove it.");
+        phoneNumbers.remove(emergency);
+        System.out.println("How many elements are in it now? " + phoneNumbers.getSize());
+        System.out.println("\nI actually don't really like this list. Let's start over. ");
+        phoneNumbers.clear();
+        System.out.println("How many elements are in it now? " + phoneNumbers.getSize());
+        System.out.println("Is this list empty now? " + (String.valueOf(phoneNumbers.isEmpty())).toUpperCase());
+    }
 
-   	public boolean isEmpty() {
-		boolean result;
-		if (count == 0) {
-			assert first == null;
-			result = true;
-		}
-		else {
-			assert first != null;
-			result = false;
-		}
-		return result;
-   	} // end isEmpty
-	
-   	public int getSize() {
-		return count;
-   	} // end getSize
+    public UnsortedLinkedDictionary() { //constructor
+        first = null; 
+        last = null; 
+        count = 0;
+    }  //end UnsortedLinkedDictionary
 
-	public final void clear() { 
-		first = null;
-		last = null;
-		count = 0;
-	} // end clear
+    public V add(K key, V value) {
+        V result = null;
+        if (contains(key)) { //if there exists a key, replace the key's old value with the new value
+            Node current = first;
+            while (current != null) {
+                if (key.equals(current.getKey())) { //iterating until we get key
+                    result = current.getValue(); 
+                    current.setValue(value); 
+                    break;
+                }
+                else {
+                    current = current.getNextNode();
+                } 
+            } 
+        }
+        else { //if key does not exist, create a new key and update node indexes
+            Node updated = new Node(key, value); 
+            if (isEmpty()) { //if this node is the first node, make this node the first node
+                first = updated;
+            }
+            else { //if not the first, modify ONLY the last node
+                last.setNextNode(updated);
+            }
+            last = updated;
+            count++; //increase count of nodes
+        }
+        return result;
+    } //end add
 
-	private class Node {
-		private K key;
-		private V value;
-		private Node next;
+    public V remove(K key) {
+        V result = null;
+        if (contains(key)) {
+            Node current = first;
+            while (current != null) {
+                //case 1: target very first index
+                if (current.equals(first) && key.equals(current.getKey())) {
+                    //splicing off the very first node and making the node.next() the first count
+                    result = current.getValue();
+                    first = first.getNextNode();
+                    //if we are removing the one and only node
+                    if (count == 1) {
+                        last = null; 
+                    }
+                    //since we've removed the first node
+                    count--;
+                    break;
+                }
+                //case 2: target is at everything after the first index
+                else if (key.equals(current.getNextNode().getKey())) {
+                    //"capturing" the node before and after the target, splicing off the target, reconnecting the before and after
+                    Node previous = current;
+                    Node target = previous.getNextNode();
+                    Node after = target.getNextNode();
+                    result = target.getValue();
+                    previous.setNextNode(after); 
+                    if (last.equals(target)) { //no new connection to be made, snip off the end and close the line.
+                        last = previous; 
+                    }
+                    count--; //-1 node, so -1 count
+                    break;
+                } 
+                 //iterating through until we find a match
+                else {
+                    current = current.getNextNode();
+                }
+            }
+        }
+        return result;
+    } //end remove
 
-		private Node(K searchKey, V dataValue) {
-			key = searchKey;
-			value = dataValue;
-			next = null;	
-		} // end constructor
-		
-		private Node(K searchKey, V dataValue, Node nextNode) {
-			key = searchKey;
-			value = dataValue;
-			next = nextNode;	
-		} // end constructor
-		
-		private K getKey() {
-			return key;
-		} // end getKey
-		
-		private V getValue() {
-			return value;
-		} // end getValue
+    public V getValue(K key) {
+        V result = null;
+        if (contains(key)) { //if key exists, get its value. if not, return nothing/null
+            Node current = first; //iterating through each node until it is found
+            while (current != null) {
+                if (key.equals(current.getKey())) {
+                    result = current.getValue(); //capturing the value of the key
+                    break;
+                }
+                else {
+                    current = current.getNextNode();
+                }
+            }
+        }
+        return result;
+    } //end getValue
 
-		private void setValue(V newValue) {
-			value = newValue;
-		} // end setValue
+    public boolean contains(K key) {
+        boolean found = false;
+        Node current = first;
+        while (!found && (current != null)) { //going through every node and automatically breaking when found
+            if (key.equals(current.getKey())) { //comparing if current has found target. otherwise, keep going
+                found = true;
+            }
+            else {
+                current = current.getNextNode();
+            }
+        } 
+        return found;
+    } //end contains
 
-		private Node getNextNode()
-		{
-			return next;
-		} // end getNextNode
-		
-		private void setNextNode(Node nextNode) {
-			next = nextNode;
-		} // end setNextNode
-	} // end Node
-} // end UnsortedLinkedDictionary
-		
+    public boolean isEmpty() {
+        boolean result;
+        if (count == 0)  { //empty!
+            assert first == null; //checking if there is no first node
+            result = true;
+        }
+        else { //not empty!
+            assert first != null; //checking if first node exists
+            result = false;
+        } 
+        return result;
+    } //end isEmpty
+
+    public int getSize() {
+        return count;
+    } //end getSize
+
+    public final void clear() {
+        //instead of deleting everything, just make all the previous elements inaccessible
+        first = null;
+        last = null;
+        count = 0;
+    } //end clear
+
+    //accessor method for key iterator to properly iterate through a linkedlist
+    public Iterator<K> getKeyIterator() {
+        return new KeyIterator();
+    } 
+
+    //accessor method for value iterator to properly iterate through a linkedlist
+    public Iterator<V> getValueIterator() {
+        return new ValueIterator();
+    } 
+
+    // class to iterate through keys (K)
+    private class KeyIterator implements Iterator<K> { 
+        private Node current;
+
+        private KeyIterator() {
+            current = first;
+        } 
+
+        public boolean hasNext() {
+            return current.getNextNode() != null;
+        } 
+
+        public K next() {
+            K result = null;
+            if (hasNext()) {
+                current = current.getNextNode();
+                result = current.getKey();
+            }
+            else {
+                throw new NoSuchElementException();
+            }
+            return result;
+        } 
+
+        //iterators cannot remove
+        public void remove(){
+            throw new UnsupportedOperationException();
+        }
+    } 
+
+    // class to iterate through values (V)
+    private class ValueIterator implements Iterator<V> {
+        private Node current;
+        
+        private ValueIterator() {
+            current = first;
+        } 
+
+        public boolean hasNext() {
+            return current.getNextNode() != null;
+        } 
+
+        public V next() {
+            V result = null;
+            if (hasNext()) {
+                current = current.getNextNode();
+                result = current.getValue();
+            }
+            else {
+                throw new NoSuchElementException();
+            }
+            return result;
+        } 
+
+        //iterators cannot remove
+        public void remove() {
+            throw new UnsupportedOperationException();
+        } 
+    } 
+
+    //provided class
+    private class Node {
+        private K key;
+        private V value;
+        private Node next;
+
+        private Node(K searchKey, V dataValue) {
+            key = searchKey;
+            value = dataValue;
+            next = null;
+        } 
+
+        private Node(K searchKey, V dataValue, Node nextNode) {
+            key = searchKey;
+            value = dataValue;
+            next = nextNode;
+        } 
+
+        private K getKey() {
+            return key;
+        } 
+
+        private V getValue() {
+            return value;
+        } 
+
+        private void setValue(V newValue) {
+            value = newValue;
+        } 
+
+        private Node getNextNode() {
+            return next;
+        } 
+
+        private void setNextNode(Node nextNode) {
+            next = nextNode;
+        } 
+    } 
+} 
