@@ -17,3 +17,5 @@ Lab 6: Solitaire Game
 Lab 7: Lab 7.java
 
 Lab 8: UnsortedLinkedDictionary.java
+
+Lab 9: BinaryTreeLab.java
