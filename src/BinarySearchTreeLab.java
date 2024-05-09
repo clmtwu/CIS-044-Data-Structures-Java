@@ -10,6 +10,10 @@ public class BinarySearchTreeLab < T extends Comparable < ? super T >> {
         System.out.println("Is the tree a valid binary search tree? " + tree.isBST());
         System.out.println("What is the inorder predecessor of 10? " + tree.getPredecessor(10));
     }
+    /*
+     * Grade: 
+     * -10 analysis of running time for countingSort is incorrect. It should be O(m + n).
+     */
     
     // P1
     /* Time Complexity = O(n)

@@ -15,6 +15,11 @@ public class Lab2 {
 		System.out.println("Computing savings in cents at Day 39: " + Format.format(computeSavings(39, 1)) + " cents."); //Formatted Answer for Question 5
 	}
 
+	/* Grade:
+	 * -2 P1 f is O(n) -10 P5 you can't change the signature (arguments and return values) of the methods provided. 
+	 * You can add your own private methods.
+	 */
+
 	/* Output: 
 	 * Array Contents: 2 3 5 7 11 13 17 19 47 53 59 61 67 71 73 79 83 89 97 23 29 31 37 41 43 
 	 * Total elements: 25

@@ -1,7 +1,5 @@
-public class Lab5
-{
+public class Lab5 {
 	public static void main(String[] args)  {
-		
 		Integer [] unsorted = {50, 10, 30, 80, 70, 20, 60, 40};
 		int length = unsorted.length;
 
@@ -37,6 +35,14 @@ public class Lab5
 		System.out.println("Is " + notlisted + " in the list? " + (String.valueOf(inArrayIterativeSorted(unsorted, notlisted))).toUpperCase());
 
 	}
+
+	/* Grade:
+	 * -5, see comments below
+	 *  public boolean equals(Object other) { AListLab <?> temporary = (AListLab <?>) other; -- 
+	 * this is incorrect before checking that other is an instance of AListLab. 
+	 * You do that check later in the code (if (!(getClass() == other.getClass())) {), but it should be before casting. 
+	 * -5 same comment for equals() of LList2Lab.
+	 */
 	/*	An unsorted list to consider for problem 1: 50 10 30 80 70 20 60 40 
 		Attempting sort...
 		A newly sorted list:

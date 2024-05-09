@@ -74,6 +74,16 @@ public class SolitaireGame {
 		return flag;
 	} // end scanAndRemovePairs
 
+	/*
+	 * Grade: 
+	 * -10 scanAndRemove removes only one elment when there is a match and not both elements: 
+	 * if (removable(x, y)) { //giving output when removed 
+	 * System.out.println("Removed: " + x + " " + y); 
+	 * current.remove(); 
+	 * flag = true; //stop scenario 
+	 * }
+	 */
+
 	public static void main(String args[]) {
 		ArrayListWithIterator<Integer> RandomList = new ArrayListWithIterator<Integer>();
 		initializeList(RandomList);

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class ArrayQueueLab<T> implements QueueInterface<T>  {
-
 	public static void main(String[] args)  {
 		//object initialization
 		ArrayQueueLab <Integer> List1 = new ArrayQueueLab<Integer>();
@@ -46,8 +45,14 @@ public class ArrayQueueLab<T> implements QueueInterface<T>  {
 		while(!NonDuplicateQueue.isEmpty()) {
 			System.out.print(NonDuplicateQueue.dequeue() + " ");
 		}
-		
 	}
+	/* Grade:
+	 * -10 enqueueNoDuplicate ArrayList<T> Temporary = new ArrayList <T>(); 
+	 * -- no need to create an additional Temporary queue. 
+	 * This results in additional memory usage (O(n)) and additional time to process the elements. 
+	 * Instead, iterate over all the elements starting at frontIndex and going to backIndex. 
+	 * See clear() for an example.
+	 */
 
 	/* Output:
 	 * 	Case One: "ListOne" Queue containing integers zero through four in order of least to greatest
